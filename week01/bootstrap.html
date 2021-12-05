@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
+    <title>스파르타코딩클럽 | 부트스트랩 연습하기</title>
+    <style>
+        * { /*모든 애들에게 이걸 다 적용*/
+            font-family: 'Jua', sans-serif; /*그렇게 하고 여기에 말해줘야 적용된다.ㄴ*/
+        }
+
+        /*background-image가 너무 크면 안되기 때문에 background-size도 넣어준다.*/
+        .login-box {
+            width: 250px;
+            height: 150px;
+            background-image: url('https://www.ancient-origins.net/sites/default/files/field/image/Agesilaus-II-cover.jpg');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            padding-top: 150px;
+            color: white; /*부모에게 먹여주면 자식에게도 먹여준다. 그래서 white를 넣어줌. (로그인 페이지 white)*/
+            border-radius: 10px;
+        }
+
+        .wrap {
+            margin: auto; /*양 옆을 적당히 공간을 비워줘라*/
+            width: 300px; /*얼만큼 비워주는지 해줘야 비워지고 원하는대로 가운데에 온다.*/
+        }
+    </style>
+</head>
+
+<body>
+<div class="wrap">
+    <div class="login-box"> <!-- 묶어주는 것 -->
+
+    </div>
+    <div>
+        <h5>여러분의 스파르타 캐릭터에 투표해주세요</h5>
+        <button type="button" class="btn btn-primary">밍밍</button>
+        <button type="button" class="btn btn-secondary">링링</button>
+        <button type="button" class="btn btn-success">랑랑</button>
+        <button type="button" class="btn btn-danger">깅깅</button>
+        <button type="button" class="btn btn-warning">강강</button>
+        <button type="button" class="btn btn-info">킹킹</button>
+        <button type="button" class="btn btn-light">콩콩</button>
+        <button type="button" class="btn btn-dark">뭉뭉</button>
+    </div>
+</div>
+
+</body>
+
+</html>

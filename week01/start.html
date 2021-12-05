@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스파르타코딩클럽 | 로그인페이지</title>
+    <!-- 이 링크들을 이렇게 써야 폰트가 적용된다. (폰트에 대한 정보가 여기에 들어있다.) -->
+    <!-- 사용을 하기 전에 여기에다가 알려줘야한다. style 위에다가 넣어야한다. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <style>
+        * { /*모든 애들에게 이걸 다 적용*/
+            font-family: 'Jua', sans-serif; /*그렇게 하고 여기에 말해줘야 적용된다.ㄴ*/
+        }
+
+        /*background-image가 너무 크면 안되기 때문에 background-size도 넣어준다.*/
+        .login-box {
+            width: 250px;
+            height: 150px;
+            background-image: url('https://www.ancient-origins.net/sites/default/files/field/image/Agesilaus-II-cover.jpg');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            padding-top: 150px;
+            color: white; /*부모에게 먹여주면 자식에게도 먹여준다. 그래서 white를 넣어줌. (로그인 페이지 white)*/
+            border-radius: 10px;
+        }
+
+        .wrap {
+            margin: auto; /*양 옆을 적당히 공간을 비워줘라*/
+            width: 300px; /*얼만큼 비워주는지 해줘야 비워지고 원하는대로 가운데에 온다.*/
+        }
+    </style>
+</head>
+
+<body>
+<div class="wrap">
+    <div class="login-box"> <!-- 묶어주는 것 -->
+        <h1 class="">로그인 페이지</h1>
+        <h5>아이디, 비밀번호를 입력해주세요</h5>
+    </div>
+    <div>
+        <p>
+            ID: <input type="text"/>
+        </p>
+        <p>
+            PW: <input type="password"/>
+        </p>
+        <button>로그인하기</button>
+    </div>
+</div>
+
+</body>
+
+</html>
