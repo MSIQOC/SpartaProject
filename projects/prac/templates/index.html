@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <title>첫 Flask 프로젝트</title>
+        <script>
+            $.ajax({
+                url: '/test', <!-- /부터 시작하면 이 앞에 url 주소가 들어있다고 보면 된다. -->
+                method: 'POST',
+                data: {
+                    'title': 'happy',
+                    'day': 'saturday',
+                    'is_max': 'true'
+                },
+                success: function (response) {
+                    console.log(response)
+                }
+            })
+        </script>
+    </head>
+    <body>
+        <h1>서버를 만들었다!</h1>
+        <h2>{{ welcome_message }}</h2>
+        <img src="{{ url_for('static', filename='edison98.jpg') }}"/>
+    </body>
+</html>

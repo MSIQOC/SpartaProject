@@ -1,20 +1,15 @@
 from pymongo import MongoClient
 
 client = MongoClient('localhost', 27017)
-db = client.sparta  #client.디비이름
+db = client.sparta
 
-toystory = db.movies.find_one({'title': '월-E'})
+target_movie = db.movies.find_one({'title': '월-E'})
+target_star = target_movie['point']
+allofthem = list(db.movies.find({'point': 0}))
+for a in allofthem:
+    print(a)
 
-for movie in db.movies.find():
-    if movie['point'] == toystory['point'] and toystory['title'] != '월-E':
-        #print(movie['point'])
-        movie['point'] = 0
-        print(movie['point'])
-        db.movies.update_one({'title': toystory['title']}, {"$set": {'point': 0}})
-
-for movie in db.movies.find():
-    if movie['point'] == toystory['point']:
-        print(movie['point'], movie['title'])
-
-
-#print(toystory['point'])
+# db.movies.updateMany({'point': target_star, 'title': {'$ne': '월-E'}}, {'$set': {'point': 0}})
+#
+# for a in allofthem:
+#     print(a)
