@@ -9,19 +9,56 @@ db = client.boyfriends
 
 
 # HTML 화면 보여주기
-@app.route('/', methods=['GET','POST'])
+@app.get('/')
 def home():
     return render_template('favorite.html')
 
 
-@app.route('/add', methods=['GET','POST'])
+@app.get('/add')
 def add():
     return render_template('add.html')
 
 
+@app.get('/chats')
+def chat():
+    return render_template('chatting.html')
+
+
+@app.post('/findchat')
+def findchat():
+    form = request.form
+    val = form['_val']
+    name = form['name']
+    boyfriend = list(db.chats.find({
+        'name': name,
+        'question': val
+    }, {'_id': False}))
+    print(boyfriend)
+    if not boyfriend:
+        return jsonify({
+            'result': 'failed'
+        })
+    return jsonify({
+        'result': 'success',
+        'chat': boyfriend
+    })
+
+@app.post('/addchat')
+def addchat():
+    form = request.form
+    question = form['question']
+    answer = form['answer']
+    name = form['name']
+    db.chats.insert_one({
+        'name': name,
+        'question': question,
+        'answer': answer
+    })
+    return jsonify({'msg': '저장성공!'})
+
 # 여기서부터 파이몽고 활용
 # 새로운 남자친구 추가
-@app.route('/adding', methods=['POST'])
+@app.post('/adding')
 def adding():
     form = request.form
     name = form['name']
@@ -42,13 +79,23 @@ def adding():
     return jsonify({'result': 'success', 'msg': '추가가 완료됐습니다!'})
 
 
-@app.route('/api/list', methods=['GET'])
+@app.get('/api/list')
 def show_boyfriends():
     boyfriends_list = list(db.boyfriends.find({}, {'_id': False}).sort('like', -1))
     return jsonify({
         'result': 'success', 'msg': 'hello',
         'boyfriends_list': boyfriends_list
     })
+
+@app.post('/api/delete')
+def delete_star():
+    # 1. 클라이언트가 전달한 name_give를 name_receive 변수에 넣습니다.
+    name = request.form['name']
+    # 2. mystar 목록에서 delete_one으로 name이 name_receive와 일치하는 star를 제거합니다.
+    db.boyfriends.delete_one({'name': name})
+    db.boyfriends.delete({'name': name})
+    # 3. 성공하면 success 메시지를 반환합니다.
+    return jsonify({'result': 'success', 'msg': '삭제가 완료됐습니다.'})
 
 
 if __name__ == '__main__':

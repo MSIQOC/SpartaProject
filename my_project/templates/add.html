@@ -31,6 +31,7 @@
                 let hobby = $('#add-hobby').val();
                 let bloodType = $('#add-blood-type').val();
                 // 2. 제목, 저자, 리뷰 중 하나라도 입력하지 않았을 경우 alert를 띄웁니다.
+
                 if(name == ''){
                     alert('남자친구의 이름을 입력해주세요!');
                     location.href = "add";
@@ -72,6 +73,7 @@
                         }
                     }
                 })
+
             }
         </script>
         <style>
@@ -94,7 +96,7 @@
         <div class="star-list" id="star-box">
 
         </div>
-        <div class="center">
+        <div class="center"><br>
             이름: <input type="text"  id="add-name"><br><br>
             성격: <input type="text"  id="add-personality"><br><br>
             나이: <input type="text"  id="add-age"><br><br>

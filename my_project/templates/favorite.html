@@ -20,6 +20,24 @@
                 showBoyfriend();
             });
 
+            function chatStar(starName){
+                location.href="chatting.html?" + starName
+            }
+            function deleteStar(name) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/delete',
+                    data: {name: name}, //여기에서 삭제할 때 name을 넘겨주는 것이다.
+                    success: function (response) {
+                        if (response['result'] == 'success') { //response가 jsonify로 백엔드에서 넘겨받은 것
+                            alert('msg')
+                            window.location.reload()
+                        }
+                    }
+                });
+            }
+
+
             function showBoyfriend() {
                 $('#bf-box').empty()
                 $.ajax({
@@ -32,7 +50,7 @@
                             let boyfriends = response['boyfriends_list']
                             for( let i=0; i<boyfriends.length; ++i ){
                                 let boyfriend = boyfriends[i]
-                                let tempHtml = `
+                                let tempHtml = `<br>
                             <div class="card">
                 <div class="card-content">
                     <div class="media">
@@ -43,10 +61,10 @@
                     </div>
                 </div>
             <footer class="card-footer">
-                    <a href="#" class="card-footer-item has-text-info">
+                    <a href = "chats?name=${boyfriend['name']}" onclick="chatStar('${boyfriend['name']}')" class="card-footer-item has-text-info">
                         대화하기
                     </a>
-                    <a href="#" class="card-footer-item has-text-danger">
+                    <a href="#" onclick="deleteStar('${boyfriend['name']}')" class="card-footer-item has-text-danger">
                         삭제
                         <span class="icon">
               <i class="fas fa-ban"></i>
@@ -97,7 +115,7 @@
         </div>
         <br>
         <div class="center">
-            <form action = "/add" method = "POST">
+            <form action = "/add" method = "GET">
                 <button id="add-button" type="submit" class="btn btn-primary" > 추가하기 </button>
             </form>
         </div>
