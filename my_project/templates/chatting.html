@@ -171,6 +171,11 @@
             text-align: center
         }
 
+        .align-center {
+            text-align: center;
+            font-weight: bold;
+        }
+
         .to_right {
             position: absolute;
             right: 700px;
@@ -219,17 +224,19 @@
     <script>
         temp = location.href.split('=')
         name = decodeURI(temp[1])
+        $(document).ready(function () {
+            $('.align-center').prepend(`${name}<br>`)
+            console.log('hello?')
+        })
 
         function postChat() {
             let question = $('#post-question').val()
             let answer = $('#post-answer').val()
-            if($('#post-question').val().length === 0){
+            if ($('#post-question').val().length === 0) {
                 alert('질문을 입력하세요')
-            }
-            else if($('#post-answer').val().length === 0){
+            } else if ($('#post-answer').val().length === 0) {
                 alert('답변을 입력하세요')
-            }
-            else {
+            } else {
                 $.ajax({
                     type: "POST",
                     url: "/addchat",
@@ -275,8 +282,7 @@
                                 num = Math.floor(Math.random() * chat.length);
                                 $(".chat_wrap .inner").append('<div class="item"><div class="box"><p class="msg">' + chat[num]['answer'] + '</p><span class="time">' + currentTime() + '</span></div></div>');
 
-                            }
-                            else {
+                            } else {
                                 $(".chat_wrap .inner").append('<div class="item"><div class="box"><p class="msg">' + '무슨 말인지 잘 모르겠어.' + '</p><span class="time">' + currentTime() + '</span></div></div>');
                             }
                             var lastItem = $(".chat_wrap .inner").find(".item:last");
@@ -286,7 +292,7 @@
 
                             var position = lastItem.position().top + $(".chat_wrap .inner").scrollTop();
 
-                           $(".chat_wrap .inner").stop().animate({scrollTop: position}, 500);
+                            $(".chat_wrap .inner").stop().animate({scrollTop: position}, 500);
                         }
                     })
                 }
@@ -324,7 +330,9 @@
     </div>
 </section>
 <br>
+<div id="boyfriend-name"></div>
 <div class="to_right">
+    <div class="align-center"></div>
     <div class="chat_wrap">
         <div class="inner">
 

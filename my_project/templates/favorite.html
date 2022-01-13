@@ -21,6 +21,16 @@
             });
 
             function chatStar(starName){
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/like',
+                    data: {name: name},
+                    success: function (response) {
+                        if (response['result'] == 'success') {
+
+                        }
+                    }
+                });
                 location.href="chatting.html?" + starName
             }
             function deleteStar(name) {
@@ -30,6 +40,7 @@
                     data: {name: name}, //여기에서 삭제할 때 name을 넘겨주는 것이다.
                     success: function (response) {
                         if (response['result'] == 'success') { //response가 jsonify로 백엔드에서 넘겨받은 것
+                            alert(response['msg'])
                             window.location.reload()
                         }
                     }
