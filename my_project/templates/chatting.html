@@ -273,8 +273,6 @@
                             if (response["result"] == "success") {
                                 let chat = response['chat']
                                 num = Math.floor(Math.random() * chat.length);
-                                console.log(chat)
-                                console.log(chat[0])
                                 $(".chat_wrap .inner").append('<div class="item"><div class="box"><p class="msg">' + chat[num]['answer'] + '</p><span class="time">' + currentTime() + '</span></div></div>');
 
                             }

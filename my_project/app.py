@@ -33,7 +33,6 @@ def findchat():
         'name': name,
         'question': val
     }, {'_id': False}))
-    print(boyfriend)
     if not boyfriend:
         return jsonify({
             'result': 'failed'
@@ -67,14 +66,18 @@ def adding():
     hobby = form['hobby']
     blood_type = form['bloodType']
 
-    db.boyfriends.insert_one({
-        'name': name,
-        'personality': personality,
-        'age': age,
-        'hobby': hobby,
-        'blood_type': blood_type,
-        'like': 0
-    })
+    boyfriend = db.boyfriends.find_one({'name': name})
+    if boyfriend:
+        return jsonify({'result':'failed', 'msg': '다른 남자친구 이름으로 써주세요!'})
+    else:
+        db.boyfriends.insert_one({
+            'name': name,
+            'personality': personality,
+            'age': age,
+            'hobby': hobby,
+            'blood_type': blood_type,
+            'like': 0
+        })
 
     return jsonify({'result': 'success', 'msg': '추가가 완료됐습니다!'})
 
@@ -87,13 +90,32 @@ def show_boyfriends():
         'boyfriends_list': boyfriends_list
     })
 
+@app.post('/api/like')
+def like_star():
+    # 1. 클라이언트가 전달한 name_give를 name_receive 변수에 넣습니다.
+    name = request.form['name'] #클라이언트가 보내줬다고 가정(index.html에서 data에 name을 넘겨준다.)
+
+    # 2. mystar 목록에서 find_one으로 name이 name_receive와 일치하는 star를 찾습니다.
+    star = db.mystar.find_one({'name': name}) #find_one으로 하면 list로 감쌀 필요가 없다.
+
+    # 3. star의 like 에 1을 더해준 new_like 변수를 만듭니다.
+    new_like = star['like'] + 1
+
+    # 4. mystar 목록에서 name이 name_receive인 문서의 like 를 new_like로 변경합니다.
+    db.mystar.update_one({'name': name}, {'$inc': {'like': 1}}) #이렇게 해주는게 더 안전하게 올려줄 수 있다.
+
+    # 참고: '$set' 활용하기!
+    # 5. 성공하면 success 메시지를 반환합니다.
+    return jsonify({'result': 'success', 'msg': name + '좋아요!'})
+
+
 @app.post('/api/delete')
 def delete_star():
     # 1. 클라이언트가 전달한 name_give를 name_receive 변수에 넣습니다.
     name = request.form['name']
     # 2. mystar 목록에서 delete_one으로 name이 name_receive와 일치하는 star를 제거합니다.
     db.boyfriends.delete_one({'name': name})
-    db.boyfriends.delete({'name': name})
+    db.chats.delete_many({'name': name})
     # 3. 성공하면 success 메시지를 반환합니다.
     return jsonify({'result': 'success', 'msg': '삭제가 완료됐습니다.'})
 
