@@ -152,6 +152,13 @@
             line-height: 1.25;
         }
 
+        .more-subtitle {
+            color: #4a4a4a;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.25;
+        }
+
         .hero.is-warning .title {
             color: rgba(0, 0, 0, .7);
         }
@@ -222,12 +229,29 @@
     </style>
 
     <script>
+        $(document).ready(function () {
+            chatStar()
+        });
         temp = location.href.split('=')
         name = decodeURI(temp[1])
         $(document).ready(function () {
             $('.align-center').prepend(`${name}<br>`)
             console.log('hello?')
         })
+
+        function chatStar(starName) {
+            $.ajax({
+                type: 'POST',
+                url: '/api/like',
+                data: {name: name},
+                success: function (response) {
+                    if (response['result'] == 'success') {
+
+                    }
+                }
+            });
+            //location.href="chatting.html?" + starName
+        }
 
         function postChat() {
             let question = $('#post-question').val()
@@ -326,6 +350,9 @@
             <h2 class="subtitle">
                 당신의 선택은
             </h2>
+            <a href="/" class="more-subtitle">
+                홈으로
+            </a>
         </div>
     </div>
 </section>
@@ -370,6 +397,7 @@
             <textarea id="post-answer" class="form-control" rows="2"></textarea>
         </div>
         <button type="button" class="btn btn-primary" onclick="postChat()">저장</button>
+
     </div>
 </div>
 </body>

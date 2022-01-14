@@ -68,7 +68,7 @@ def adding():
 
     boyfriend = db.boyfriends.find_one({'name': name})
     if boyfriend:
-        return jsonify({'result':'failed', 'msg': '다른 남자친구 이름으로 써주세요!'})
+        return jsonify({'result': 'failed', 'msg': '다른 남자친구 이름으로 써주세요!'})
     else:
         db.boyfriends.insert_one({
             'name': name,
@@ -92,7 +92,7 @@ def show_boyfriends():
 
 
 @app.post('/api/like')
-def like_star():
+def chat_star():
     name = request.form['name'] #클라이언트가 보내줬다고 가정(index.html에서 data에 name을 넘겨준다.)
     db.boyfriends.update_one({'name': name}, {'$inc': {'like': 1}}) #이렇게 해주는게 더 안전하게 올려줄 수 있다.
     db.boyfriends.find().sort({'like': 1, 'name': 1})

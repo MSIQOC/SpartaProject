@@ -16,25 +16,9 @@
                 crossorigin="anonymous"></script>
         <script type="text/javascript">
             $(document).ready(function () {
-                // index.html 로드가 완료되면 자동으로 showStar() 함수를 호출합니다.
                 showBoyfriend();
             });
-            function noBack(){
-                window.history.forward();
-            }
-            function chatStar(starName){
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/like',
-                    data: {name: name},
-                    success: function (response) {
-                        if (response['result'] == 'success') {
 
-                        }
-                    }
-                });
-                location.href="chatting.html?" + starName
-            }
             function deleteStar(name) {
                 $.ajax({
                     type: 'POST',
